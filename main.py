@@ -47,7 +47,7 @@ def main():
         tk.Label(lang2ScrollView.frame, text=t, borderwidth="1", relief="solid").grid(row=row, column=0, sticky="nsew", padx=1, pady=1)
 
     def yScrollSet(first, last):
-        print("yScrollSet", first, last)
+        # print("yScrollSet", first, last)
         first = float(first)
         last = float(last)
         scrollbar.set(first, last)
@@ -56,13 +56,13 @@ def main():
         return
 
     def scrollSet(op, howMany, units=''):
-        print("scrollSet", op, howMany, units)
+        # print("scrollSet", op, howMany, units)
         scrollArguments = ''
         if op == 'scroll':
             scrollArguments = (op, howMany, units)
         elif op == 'moveto':
             scrollArguments = (op, howMany)
-        print(scrollArguments)
+        # print(scrollArguments)
         if scrollArguments:
             keysScrollView.yview(*scrollArguments)
             lang1ScrollView.yview(*scrollArguments)
@@ -73,6 +73,13 @@ def main():
     lang1ScrollView.config( yscrollcommand = yScrollSet )
     lang2ScrollView.config( yscrollcommand = yScrollSet )
     scrollbar.config( command = scrollSet )
+
+    def onPanelContainerConfigure(event):
+        '''Reset the scroll region to encompass the inner frame'''
+        print("onPanelContainerConfigure : "+str(event))
+        return
+
+    keysScrollView.bind("<Configure>", onPanelContainerConfigure)
 
     # self._widgets = []
     # for row in range(rows):
