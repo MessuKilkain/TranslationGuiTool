@@ -11,7 +11,7 @@ class ScrollableViewWithContainer(tk.Canvas):
 
         self.frame.bind("<Configure>", self.onFrameConfigure)
 
-        self.populate()
+        # self.populate()
 
     def populate(self):
         '''Put in some fake data'''
